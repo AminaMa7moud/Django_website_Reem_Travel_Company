@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-lg fixed-top mb-5" style="backdrop-filter: blur(10px);background: linear-gradient(135deg, #2c3e50, rgb(139, 173, 207)); 
+ padding: 10px 0; box-shadow: 0 4px 12px #0000001a;">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="{% url 'home' %}" style="color: white; font-size: 1.8rem;">ريم ترافيل</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            style="border: none; outline: none;">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">الرئيسية</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'hotel_list' %}">الفنادق</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'trip_list' %}">الرحلات</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'packages_list' %}">الباكدجات</a></li>
+                <li class="nav-item"><a class="nav-link btn-book" href="{% url 'booking_home' %}">احجز الآن</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">اتصل بنا</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<style>
+    .navbar-nav .nav-link {color: white;font-weight: 500;font-size: 1.1rem;padding: 8px 15px;transition: all 0.3s ease-in-out;}
+    .navbar-nav .nav-link:hover {color: #51e7e5;transform: translateY(-2px);}
+    .btn-book {background: #51c4e7;color: white !important;padding: 8px 15px;border-radius: 6px;transition: all 0.3s;}
+    .btn-book:hover {background: #61edf4;transform: scale(1.1);}
+</style>

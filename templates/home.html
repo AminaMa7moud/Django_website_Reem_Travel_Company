@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Reem Travel - اكتشف عالمك{% endblock %}
+
+{% block style %}
+<style>
+    .hero-section {
+        background: url('https://i.pinimg.com/736x/e9/9d/5e/e99d5e2b2fc0a5a0aebcdf557792c0bb.jpg') center center / cover no-repeat;
+        /* https://i.pinimg.com/736x/1f/b7/87/1fb78717ab5982739729a7a715de24be.jpg */
+        height: 100vh;
+        position: relative;
+        color: white;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0, 41, 68, 0.6);
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero-content h1 {
+        font-size: 3.2rem;
+        font-weight: 800;
+        color: #ffffff;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+    }
+
+    .hero-content h2 {
+        font-size: 1.8rem;
+        font-weight: 400;
+        margin: 15px 0;
+        color: #d6f5ff;
+    }
+
+    .hero-content p {
+        font-size: 1.1rem;
+        max-width: 600px;
+        margin: auto;
+        color: #cceeff;
+        margin-bottom: 30px;
+        line-height: 1.7;
+    }
+
+    .btn-tour {
+        border: none;
+        padding: 12px 24px;
+        border-radius: 25px;
+        font-weight: bold;
+        margin: 0 10px;
+        transition: 0.3s;
+    }
+
+    .btn-public {
+        background-color: #00bcd4;
+        color: white;
+    }
+
+    .btn-private {
+        background-color: transparent;
+        border: 2px solid #00bcd4;
+        color: #00bcd4;
+    }
+
+    .btn-tour:hover {
+        opacity: 0.9;
+        transform: scale(1.05);
+    }
+
+    .navbar {
+        background: rgba(255, 255, 255, 0.05) !important;
+    }
+
+    .nav-link,
+    .navbar-brand {
+        color: white !important;
+        font-weight: bold;
+    }
+
+    .btn-signup {
+        background-color: #00bcd4;
+        color: white;
+        border-radius: 20px;
+        padding: 6px 16px;
+        font-weight: bold;
+    }
+
+    .btn-signup:hover {
+        background-color: #0097a7;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>ريم ترافيل</h1><hr>
+        <h2>رحلتك تبدأ من هنا</h2>
+        <p>
+            نحن متخصصون في تنظيم رحلات فاخرة  <br>
+            حجوزات فنادق عالمية  وتجارب سفر لا تُنسى  <br>
+            لتعيش كل لحظة وكأنها حلم <br>
+            </p>
+        <div>
+            <button class="btn btn-tour btn-public">حجوزات الفنادق </button>
+            <button class="btn btn-tour btn-private"> الرحلات المختلفة</button>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

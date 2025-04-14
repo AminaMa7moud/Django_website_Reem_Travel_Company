@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">حجز رحلة يوم واحد</h2>
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="full_name" class="form-label">الاسم الكامل</label>
+            <input type="text" class="form-control" id="full_name" name="full_name" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="phone" class="form-label">رقم الهاتف</label>
+            <input type="tel" class="form-control" id="phone" name="phone" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="trip" class="form-label">اختر الرحلة</label>
+            <select class="form-control" id="trip" name="trip" required>
+                {% for trip in trips %}
+                <option value="{{ trip.id }}">{{ trip.name }} - {{ trip.price_per_person }} جنيه</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="travel_date" class="form-label">تاريخ الرحلة</label>
+            <input type="date" class="form-control" id="travel_date" name="travel_date" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="departure_location" class="form-label">مكان التحرك</label>
+            <input type="text" class="form-control" id="departure_location" name="departure_location" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="total_amount" class="form-label">المبلغ الكلي</label>
+            <input type="number" class="form-control" id="total_amount" name="total_amount" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="paid_amount" class="form-label">المبلغ المدفوع</label>
+            <input type="number" class="form-control" id="paid_amount" name="paid_amount" required>
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">إتمام الحجز</button>
+    </form>
+</div>
+{% endblock %}

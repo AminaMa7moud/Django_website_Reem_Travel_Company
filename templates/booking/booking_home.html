@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">اختر نوع الحجز</h2>
+    <div class="row justify-content-center">
+        <!-- كارت باكدج -->
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">حجز باكدج</h5>
+                    <p class="card-text">حجز باكدج كاملة تتضمن كل الخدمات.</p>
+                    <a href="{% url 'packages_list' %}" class="btn btn-primary"> احجز الآن</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- كارت رحلة يوم واحد -->
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">حجز رحلة يوم واحد</h5>
+                    <p class="card-text">اختر واحدة من الرحلات اليومية.</p>
+                    <a href="{% url 'book_one_day_trip' %}" class="btn btn-success">احجز الآن</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- كارت حجز فندق مع رحلات داخلية -->
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">حجز فندق + رحلات داخلية</h5>
+                    <p class="card-text">اختر الفندق ونوع الغرفة والرحلات الداخلية.</p>
+                    <a href="{% url 'book_hotel' %}" class="btn btn-info">احجز الآن</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

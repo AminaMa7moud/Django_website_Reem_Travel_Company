@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container p-5 rounded-5" style="margin-top:80px ; background: linear-gradient(135deg, #2c3e50, rgb(139, 173, 207));">
+    <h2 class="text-center pt-0 text-light mt-0">اتصل بنا</h2><hr>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success text-center ">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+    <div class="row">
+            <div class="card shadow-lg p-4">
+                <form method="post" class="contact-form">
+                    {% csrf_token %}
+                    <div class="form-group mb-4">
+                        <label for="name" class="form-label">الاسم</label>
+                        <input type="text" name="name" class="form-control custom-input">
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="email" class="form-label">البريد الإلكتروني</label>
+                        <input type="email" name="email" class="form-control custom-input">
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="phone" class="form-label">رقم الهاتف</label>
+                        <input type="tel" name="phone" class="form-control custom-input">
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="message" class="form-label">رسالتك</label>
+                        <textarea name="message" class="form-control custom-input" rows="1"></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-submit">إرسال</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<style>
+    .contact-form .form-group {
+        margin-bottom: 30px;
+    }
+    .contact-form .form-label {
+        font-weight: 600;
+        color: #007bff;
+    }
+    .contact-form .form-control.custom-input {
+        border-radius: 1rem;
+        border: 2px solid #ddd;
+        padding: 12px 20px;
+        font-size: 16px;
+        transition: border 0.3s ease, box-shadow 0.3s ease;
+    }
+    .contact-form .form-control.custom-input:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+    }
+    .contact-form .btn-submit {
+        background-color: #007bff;
+        color: white;
+        font-weight: 600;
+        border-radius: 2rem;
+        padding: 12px 30px;
+        border: none;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .contact-form .btn-submit:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+    }
+    .alert-success {
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+        color: #155724;
+        border-radius: 0.5rem;
+        font-weight: 600;
+    }
+</style>
+{% endblock %}
+
+
+
+<!-- المحلة الكبري : شارع محب          شرم الشيخ : الهضبة -->

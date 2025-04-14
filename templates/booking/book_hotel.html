@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">حجز فندق</h2>
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="full_name" class="form-label">الاسم الكامل</label>
+            <input type="text" class="form-control" id="full_name" name="full_name" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="phone" class="form-label">رقم الهاتف</label>
+            <input type="tel" class="form-control" id="phone" name="phone" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="hotel" class="form-label">اختر الفندق</label>
+            <select class="form-control" id="hotel" name="hotel" required>
+                {% for hotel in hotels %}
+                <option value="{{ hotel.id }}">{{ hotel.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="room_type" class="form-label">نوع الغرفة</label>
+            <select class="form-control" id="room_type" name="room_type" required>
+                <option value="single">غرفة فردية</option>
+                <option value="double">غرفة مزدوجة</option>
+                <option value="suite">جناح</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="nights" class="form-label">عدد الليالي</label>
+            <input type="number" class="form-control" id="nights" name="nights" min="1" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="internal_trips" class="form-label">اختر الرحلات الداخلية (اختياري)</label>
+            <select class="form-control" id="internal_trips" name="internal_trips" multiple>
+                {% for trip in internal_trips %}
+                <option value="{{ trip.id }}">{{ trip.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="check_in" class="form-label">تاريخ الوصول</label>
+            <input type="date" class="form-control" id="check_in" name="check_in" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="check_out" class="form-label">تاريخ المغادرة</label>
+            <input type="date" class="form-control" id="check_out" name="check_out" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="departure_location" class="form-label">مكان التحرك</label>
+            <input type="text" class="form-control" id="departure_location" name="departure_location" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="total_amount" class="form-label">المبلغ الكلي</label>
+            <input type="number" class="form-control" id="total_amount" name="total_amount" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="paid_amount" class="form-label">المبلغ المدفوع</label>
+            <input type="number" class="form-control" id="paid_amount" name="paid_amount" required>
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">إتمام الحجز</button>
+    </form>
+</div>
+{% endblock %}

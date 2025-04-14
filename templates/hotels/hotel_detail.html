@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="hotel-detail-page py-5 px-4 mt-5 ">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                {% if hotel.hotelimage_set.all %}
+                <div id="hotelCarousel" class="carousel slide shadow rounded-4" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for image in hotel.hotelimage_set.all %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            <img src="{{ image.image.url }}" class="d-block w-100 rounded-4" alt="Hotel Image">
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#hotelCarousel"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#hotelCarousel"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="col-md-6 text-white">
+                <h1 class="mb-3 fw-bold text-center">
+                    فندق {{ hotel.name }} <i class="fa-solid fa-hotel ms-2"></i>
+                </h1>
+                <p class="text-light mb-1"><i class="fa-solid fa-location-dot me-2"></i> {{ hotel.address }}</p>
+                <p class="mb-3">{{ hotel.details }}</p>
+
+                <p class="mb-2">
+                    {% for _ in "12345"|slice:":hotel.stars" %}
+                    <i class="fa-solid fa-star text-warning"></i>
+                    {% endfor %}
+                    <span class="ms-2">: التقييم</span>
+                </p>
+
+                <h4 class="mt-4"><i class="fa-solid fa-bed me-2"></i> أنواع الغرف</h4>
+                <ul class="list-group rounded-3 shadow-sm mt-2">
+                    {% for room in hotel.room_types.all %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center mt-1">
+                        <strong>{{ room.type_name }}</strong>
+                        <span class="text-success fw-bold">{{ room.price_per_night }} جنيه / ليلة</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+
+                <div class="mt-3 text-center">
+                    <a href="#" class="btn btn-book-now rounded-pill px-5 py-2 fs-5">
+                        احجز الآن <i class="fa-solid fa-calendar-check ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+            <div class="row mt-5">
+                <div class="col-md-6 mt-4">
+                    <h3 class="text-info"><i class="fa-solid fa-comments" style="color: #4A628A;"></i> التقييمات</h3>
+                    <div class="list-group">
+                        {% for review in reviews %}
+                        <div class="list-group-item mb-3 rounded shadow-sm p-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <strong><i class="fa-solid fa-user"></i> {{ review.user_name }}</strong>
+                                <span>
+                                    {% for _ in "x"|rjust:review.rating %}
+                                    <i class="fa-solid fa-star" style="color: #FFD700;"></i>
+                                    {% endfor %}
+                                </span>
+                            </div>
+                            <p class="mt-2">{{ review.comment }}</p>
+                        </div>
+                        {% empty %}
+                        <p class="text-muted">لا توجد تقييمات حتى الآن.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            
+                <div class="col-md-6" id="reviewFormContainer">
+                    <h3 class="text-info mt-4"><i class="fa-solid fa-pen-to-square" style="color: #4A628A;"></i> أضف تقييمك</h3>
+                    <form method="post" class="bg-light p-4 rounded shadow-sm" id="reviewForm"
+                        onsubmit="return handleFormSubmit();">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="form-label text-primary">اسمك</label>
+                            {{ form.user_name }}
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label  text-primary">التقييم (من 1 إلى 5)</label>
+                            {{ form.rating }}
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label  text-primary">تعليقك</label>
+                            {{ form.comment }}
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">إرسال التقييم</button>
+                    </form>
+                </div>
+            </div>
+            </div>
+            
+            <script>
+                function handleFormSubmit() {
+                    document.getElementById('reviewFormContainer').style.display = 'none';
+                    localStorage.setItem('reviewSubmitted', 'true');
+                    return true;
+                }
+
+                window.onload = function () {
+                    if (localStorage.getItem('reviewSubmitted') === 'true') {
+                        const form = document.getElementById('reviewFormContainer');
+                        if (form) {
+                            form.style.display = 'none';
+                        }
+                    }
+                }
+            </script>
+    </div>
+</div>
+
+<!-- ستايلات -->
+<style>
+    .hotel-detail-page {
+        background: linear-gradient(135deg, #2c3e50, #8baddf);
+        border-radius: 12px;
+        color: white;
+        min-height: 100vh;
+    }
+
+    .carousel-inner img {
+        height: 400px;
+        object-fit: cover;
+        border-radius: 1rem;
+    }
+
+    .list-group-item {
+        border: none;
+        transition: background 0.3s ease;
+    }
+
+    .list-group-item:hover {
+        background-color: #e7f3fe;
+        cursor: pointer;
+    }
+
+    .btn-book-now {
+        background: linear-gradient(135deg, #2c3e50, #8baddf);
+        color: #fff;
+        border: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-book-now:hover {
+        transform: scale(1.05);
+        background: linear-gradient(135deg, #1b2b38, #709ec6);
+    }
+
+    h1,
+    h3,
+    h4 {
+        color: #ffffff;
+    }
+
+    .fa-star {
+        color: #FFD700;
+    }
+
+    .list-group {
+        background-color: transparent;
+    }
+
+    form label {
+        font-weight: bold;
+    }
+</style>
+{% endblock %}

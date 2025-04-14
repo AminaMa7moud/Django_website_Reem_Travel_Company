@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container pt-3" style="margin-top: 80px; margin-bottom: 200px;" >
+<div class="text-center mb-5">
+    <h2 class="section-title">
+        الباكدجات المتاحة
+    </h2>
+</div>
+    <div class="row">
+        {% for package in packages %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card package-card shadow-sm h-100 border-0 rounded-4">
+                <div class="card-body text-end">
+                    <h5 class="card-title mb-3 text-primary">
+                    {{ package.name }} <i class="fa-solid fa-suitcase-rolling me-2"></i> 
+                    </h5>
+                    <p class="card-text"><strong>الفندق:</strong>
+                        <a href="{% url 'hotel_detail' package.hotel.id %}" class="text-decoration-none text-dark">
+                            {{ package.hotel.name }}
+                        </a>
+                    </p>
+                    <p class="card-text"><strong>المدة:</strong> {{ package.duration_days }} يوم / {{ package.duration_nights }} ليلة</p>
+                    <p class="card-text"><strong>السعر:</strong> {{ package.price }} جنيه للفردين</p>
+
+                    <div class="mt-4 text-center">
+                        <a href="{% url 'package_detail' package.id %}" class="btn btn-book-now rounded-pill px-4 py-2">
+                            تفاصيل الباكدج <i class="fa-solid fa-arrow-left-long me-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center">لا توجد باكدجات حالياً.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+{% block style %}
+<style>
+    .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #f0f0f0;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    width: 60%;
+    height: 3px;
+    background-color: #f0f0f0;
+    bottom: 0;
+    left: 20%;
+    border-radius: 2px;
+}
+
+    .card.package-card {
+        transition: all 0.3s ease;
+        background: linear-gradient(145deg, #fdfdfd, #f0f0f0);
+    }
+
+    .card.package-card:hover {
+        transform: translateY(-6px) scale(1.02);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-book-now {
+        background: linear-gradient(135deg, #2c3e50, #8baddf);
+        color: #fff;
+        border: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-book-now:hover {
+        transform: scale(1.05);
+        background: linear-gradient(135deg, #1b2b38, #709ec6);
+    }
+</style>
+{% endblock %}

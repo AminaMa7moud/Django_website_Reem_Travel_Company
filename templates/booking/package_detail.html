@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ package.name }}</h2>
+<p>الفندق: <a href="{% url 'hotel_detail' package.hotel.id %}">{{ package.hotel.name }}</a></p>
+<p>مدة الإقامة: {{ package.duration_days }} أيام / {{ package.duration_nights }} ليالي</p>
+<p>السعر: {{ package.price }} جنيه للفردين</p>
+
+<h3>الرحلات المتاحة في الباكدج:</h3>
+<ul>
+    {% for trip in package.trips.all %}
+    <li><a href="{% url 'internal_trip_detail' trip.id %}">{{ trip.name }}</a></li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'book_package' package.id %}">احجز الآن</a>
+{% endblock %}
