@@ -1,38 +1,53 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container mt-4">
-    <div class="card shadow-lg">
-        <div class="card-body">
-            <h2 class="text-center mb-4">حجز الباكدج: {{ package.name }}</h2>
+<div class="container mt-5 pt-4">
+    <h2 class="text-center mb-4 text-light mt-5">حجز الباكدج: {{ package.name }}</h2>
 
-            <form method="post">
-                {% csrf_token %}
-                <div class="row">
-                    {% for field in form %}
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">{{ field.label }}</label>
-                        {{ field }}
-                        {% if field.errors %}
-                        <div class="text-danger">{{ field.errors|first }}</div>
-                        {% endif %}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <button type="submit" class="btn btn-primary w-100">إتمام الحجز</button>
-            </form>
+    <form method="post" class="mx-auto text-light" style="width: 80%;">
+        {% csrf_token %}
+        <div class="row">
+            {% for field in form %}
+            <div class="col-md-6 mb-3">
+                <label class="form-label">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                <div class="text-danger">{{ field.errors|first }}</div>
+                {% endif %}
+            </div>
+            {% endfor %}
         </div>
-    </div>
+
+        <button type="submit" class="btn w-25">إتمام الحجز</button>
+    </form>
 </div>
 
 <style>
-    .card {
-        max-width: 600px;
-        margin: auto;
+    body {
+        background: linear-gradient(135deg, #2c3e50, rgb(139, 173, 207));
+        min-height: 100vh;
     }
 
-    h2 {
-        font-size: 1.5rem;
+    .btn {
+        background: linear-gradient(135deg, #2c3e50, #8baddf);
+        color: #fff;
+        border: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn:hover {
+        transform: scale(1.05);
+        background: linear-gradient(135deg, #1b2b38, #709ec6);
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input,
+    select,
+    textarea {
+        background-color: #f8f9fa;
     }
 </style>
 {% endblock %}

@@ -1,42 +1,63 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container mt-5">
-    <h2 class="text-center mb-4">اختر نوع الحجز</h2>
-    <div class="row justify-content-center">
+<div class="container mt-5 pt-5">
+    <h2 class="text-center fw-bold text-light my-2">اختر نوع الحجز</h2><hr>
+    <div class="row justify-content-center g-4 mt-1">
         <!-- كارت باكدج -->
         <div class="col-md-4">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">حجز باكدج</h5>
-                    <p class="card-text">حجز باكدج كاملة تتضمن كل الخدمات.</p>
-                    <a href="{% url 'packages_list' %}" class="btn btn-primary"> احجز الآن</a>
+            <div class="card shadow-lg border-0 rounded-4 overflow-hidden h-100">
+                <img src="https://i.pinimg.com/736x/ed/b5/60/edb560481c98f5cb25dde31ef450a103.jpg" class="card-img-top"
+                    alt="باكدج" style="height: 300px; object-fit: cover;">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-bold">سافر براحتك (باكدج متكامل)</h5>
+                    <p class="card-text text-muted">باكدج يشمل فندق وتنقلات ورحلات وكل حاجة مرتبة ليك.</p>
+                    <a href="{% url 'packages_list' %}" class="btn transition-all text-white px-4 rounded-pill">احجز الآن</a>
                 </div>
             </div>
         </div>
 
         <!-- كارت رحلة يوم واحد -->
         <div class="col-md-4">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">حجز رحلة يوم واحد</h5>
-                    <p class="card-text">اختر واحدة من الرحلات اليومية.</p>
-                    <a href="{% url 'book_one_day_trip' %}" class="btn btn-success">احجز الآن</a>
+            <div class="card shadow-lg border-0 rounded-4 overflow-hidden h-100">
+                <img src="https://i.pinimg.com/736x/7b/b6/d4/7bb6d4982604f3b31bc7f98e7e6e9e32.jpg" class="card-img-top"
+                    alt="رحلة يوم" style="height: 300px; object-fit: cover;">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-bold">يوم واحد مش هتنساه</h5>
+                    <p class="card-text text-muted">خدلك يوم راحة في مكان مميز ورجع مبسوط.</p>
+                    <a href="{% url 'book_one_day_trip' %}" class="btn transition-all text-white px-4 rounded-pill">احجز
+                        الآن</a>
                 </div>
             </div>
         </div>
 
-        <!-- كارت حجز فندق مع رحلات داخلية -->
+        <!-- كارت حجز فندق + رحلات داخلية -->
         <div class="col-md-4">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">حجز فندق + رحلات داخلية</h5>
-                    <p class="card-text">اختر الفندق ونوع الغرفة والرحلات الداخلية.</p>
-                    <a href="{% url 'book_hotel' %}" class="btn btn-info">احجز الآن</a>
+            <div class="card shadow-lg border-0 rounded-4 overflow-hidden h-100">
+                <img src="https://i.pinimg.com/736x/ab/57/40/ab5740ef85635be512b34ffc650a74b7.jpg" class="card-img-top"
+                    alt="فندق ورحلات" style="height: 300px; object-fit: cover;">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-bold">فندق ورحلات على مزاجك</h5>
+                    <p class="card-text text-muted">اختر الفندق اللي يناسبك واضيف عليه رحلات مميزة براحتك.</p>
+                    <a href="{% url 'book_hotel' %}" class="btn transition-all text-white px-4 rounded-pill">احجز الآن</a>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
+<style>
+     .btn {
+        background: linear-gradient(135deg, #2c3e50, #8baddf);
+        color: #fff;
+        border: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
 
+    .btn:hover {
+        transform: scale(1.05);
+        background: linear-gradient(135deg, #1b2b38, #709ec6);
+    }
+</style>
 {% endblock %}

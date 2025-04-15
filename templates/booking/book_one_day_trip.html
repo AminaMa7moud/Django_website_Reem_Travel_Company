@@ -1,51 +1,72 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container mt-5">
-    <h2 class="text-center mb-4">حجز رحلة يوم واحد</h2>
-    <form method="post">
+<div class="container mt-5 pt-5">
+    <h2 class="text-center mb-4 text-light">حجز رحلة يوم واحد</h2><hr>
+    <form method="post" class="mx-auto text-light" style="width: 80%;">
         {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="full_name" class="form-label">الاسم الكامل</label>
+                <input type="text" class="form-control" id="full_name" name="full_name" required>
+            </div>
 
-        <div class="mb-3">
-            <label for="full_name" class="form-label">الاسم الكامل</label>
-            <input type="text" class="form-control" id="full_name" name="full_name" required>
+            <div class="col-md-6 mb-3">
+                <label for="phone" class="form-label">رقم الهاتف</label>
+                <input type="tel" class="form-control" id="phone" name="phone" required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label for="trip" class="form-label">اختر الرحلة</label>
+                <select class="form-control" id="trip" name="trip" required>
+                    {% for trip in trips %}
+                    <option value="{{ trip.id }}">{{ trip.name }} - {{ trip.price_per_person }} جنيه</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label for="travel_date" class="form-label">تاريخ الرحلة</label>
+                <input type="date" class="form-control" id="travel_date" name="travel_date" required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label for="departure_location" class="form-label">مكان التحرك</label>
+                <input type="text" class="form-control" id="departure_location" name="departure_location" required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label for="total_amount" class="form-label">المبلغ الكلي</label>
+                <input type="number" class="form-control" id="total_amount" name="total_amount" required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label for="paid_amount" class="form-label">المبلغ المدفوع</label>
+                <input type="number" class="form-control" id="paid_amount" name="paid_amount" required>
+            </div>
         </div>
 
-        <div class="mb-3">
-            <label for="phone" class="form-label">رقم الهاتف</label>
-            <input type="tel" class="form-control" id="phone" name="phone" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="trip" class="form-label">اختر الرحلة</label>
-            <select class="form-control" id="trip" name="trip" required>
-                {% for trip in trips %}
-                <option value="{{ trip.id }}">{{ trip.name }} - {{ trip.price_per_person }} جنيه</option>
-                {% endfor %}
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label for="travel_date" class="form-label">تاريخ الرحلة</label>
-            <input type="date" class="form-control" id="travel_date" name="travel_date" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="departure_location" class="form-label">مكان التحرك</label>
-            <input type="text" class="form-control" id="departure_location" name="departure_location" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="total_amount" class="form-label">المبلغ الكلي</label>
-            <input type="number" class="form-control" id="total_amount" name="total_amount" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="paid_amount" class="form-label">المبلغ المدفوع</label>
-            <input type="number" class="form-control" id="paid_amount" name="paid_amount" required>
-        </div>
-
-        <button type="submit" class="btn btn-success w-100">إتمام الحجز</button>
+        <button type="submit" class="btn w-25">إتمام الحجز</button>
     </form>
 </div>
+
+<style>
+    body {
+        background: linear-gradient(135deg, #2c3e50, rgb(139, 173, 207));
+        min-height: 100vh;
+    }
+
+    .btn {
+        background: linear-gradient(135deg, #2c3e50, #8baddf);
+        color: #fff;
+        border: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn:hover {
+        transform: scale(1.05);
+        background: linear-gradient(135deg, #1b2b38, #709ec6);
+    }
+</style>
 {% endblock %}

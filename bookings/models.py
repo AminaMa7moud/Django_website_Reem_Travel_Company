@@ -3,6 +3,7 @@ from hotels.models import *
 from trips.models import *
 from trips.models import OneDayTrip
 
+
 class OneDayTripBooking(models.Model):
     full_name = models.CharField(max_length=255)
     phone = models.CharField(max_length=15)
@@ -19,10 +20,6 @@ class OneDayTripBooking(models.Model):
     def __str__(self):
         return f"حجز {self.full_name} لـ {self.trip.name}"
     
-
-
-
-# هنا سنقوم بتعريف نموذج جديد لحجز الفنادق
 class HotelBooking(models.Model):
     ROOM_TYPES = [
         ('single', 'غرفة فردية'),
@@ -47,11 +44,6 @@ class HotelBooking(models.Model):
     def __str__(self):
         return f"حجز {self.full_name} في {self.hotel.name}"
 
-
-
-
-
-
 class Package(models.Model):
     name = models.CharField(max_length=255, verbose_name="اسم الباكدج")
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, verbose_name="الفندق")
@@ -65,10 +57,6 @@ class Package(models.Model):
 
     def get_trip_names(self):
         return ", ".join([trip.name for trip in self.trips.all()])
-
-
-
-
 
 class PackageBooking(models.Model):
     package = models.ForeignKey(Package, on_delete=models.CASCADE)  # الباكدج المحجوز

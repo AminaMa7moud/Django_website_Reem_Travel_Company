@@ -1,16 +1,101 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>{{ package.name }}</h2>
-<p>الفندق: <a href="{% url 'hotel_detail' package.hotel.id %}">{{ package.hotel.name }}</a></p>
-<p>مدة الإقامة: {{ package.duration_days }} أيام / {{ package.duration_nights }} ليالي</p>
-<p>السعر: {{ package.price }} جنيه للفردين</p>
+<!-- Header Section -->
+<div class="container text-white text-center mt-5 pt-5">
+    <h1 class="display-5 fw-bold">{{ package.name }}</h1>
+    <p class="lead">باكدج مميز يشمل إقامة فندقية ورحلات داخلية و انتقالات بأفضل الأسعار</p>
+</div>
 
-<h3>الرحلات المتاحة في الباكدج:</h3>
-<ul>
-    {% for trip in package.trips.all %}
-    <li><a href="{% url 'internal_trip_detail' trip.id %}">{{ trip.name }}</a></li>
-    {% endfor %}
-</ul>
+<div class="container-fluid py-5" style="background: linear-gradient(135deg, #2c3e50, #8baddf);">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card shadow border-0 rounded-4 overflow-hidden d-flex flex-row align-items-stretch"
+                    style="height: 400px;">
 
-<a href="{% url 'book_package' package.id %}">احجز الآن</a>
+                    <!-- صورة الباكدج -->
+                    <div class="col-md-6 p-0">
+                        <img src="https://i.pinimg.com/736x/f1/b5/56/f1b5565693e1fe73c6c14ede6c629bff.jpg" alt="Package Image" class="w-100 h-100 object-fit-cover">
+                    </div>
+
+                    <!-- التفاصيل -->
+                    <div class="col-md-6 p-4 d-flex flex-column justify-content-between bg-white">
+                        <div>
+                            <h3 class="fw-bold text-primary mb-3">{{ package.name }}</h3>
+
+                            <p class="mb-2"><i class="fa-solid fa-hotel text-primary me-2"></i>
+                                <strong>الفندق:</strong>
+                                <a href="{% url 'hotel_detail' package.hotel.id %}"
+                                    class="text-decoration-none text-dark">
+                                    {{ package.hotel.name }}
+                                </a>
+                            </p>
+
+                            <p class="mb-2"><i class="fa-solid fa-clock text-warning me-2"></i>
+                                <strong>المدة:</strong> {{ package.duration_days }} أيام / {{ package.duration_nights }}
+                                ليالي
+                            </p>
+
+                            <p class="mb-2"><i class="fa-solid fa-tag text-success me-2"></i>
+                                <strong>السعر:</strong> {{ package.price }} جنيه للفردين
+                            </p>
+
+                            <div>
+                                <p class="mb-2"><i
+                                        class="fa-solid fa-route text-info me-2"></i><strong>الرحلات:</strong></p>
+                                <ul class="list-unstyled ms-3 mb-0">
+                                    {% for trip in package.trips.all %}
+                                    <li>
+                                        <i class="fa-solid fa-location-dot text-muted me-2"></i>
+                                        <a href="{% url 'internal_trip_detail' trip.id %}"
+                                            class="text-decoration-none text-secondary">
+                                            {{ trip.name }}
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- زرار الحجز -->
+                        <div class="text-center mt-3">
+                            <a href="{% url 'book_package' package.id %}" class="btn btn-lg btn-book-now px-5 py-2">
+                                <i class="fa-solid fa-calendar-check me-2"></i>احجز الآن
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- نهاية الكارد -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CSS خاص -->
+<style>
+    .btn-book-now {
+        background: linear-gradient(135deg, #2c3e50, #8baddf);
+        color: #fff;
+        font-weight: bold;
+        border: none;
+        transition: 0.3s ease;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        border-radius: 50px;
+    }
+
+    .btn-book-now:hover {
+        background: linear-gradient(135deg, #1b2b38, #709ec6);
+        transform: scale(1.1);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .object-fit-cover {
+        object-fit: cover;
+    }
+
+    .card {
+        overflow: hidden;
+        border-radius: 20px;
+    }
+</style>
 {% endblock %}

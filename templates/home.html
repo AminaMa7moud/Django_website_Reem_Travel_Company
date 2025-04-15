@@ -101,6 +101,11 @@
     .btn-signup:hover {
         background-color: #0097a7;
     }
+
+    img{
+        border-radius: 10px;
+        object-fit: fill;
+    }
 </style>
 {% endblock %}
 
@@ -116,10 +121,11 @@
             لتعيش كل لحظة وكأنها حلم <br>
             </p>
         <div>
-            <button class="btn btn-tour btn-public">حجوزات الفنادق </button>
-            <button class="btn btn-tour btn-private"> الرحلات المختلفة</button>
+            <a href="{% url 'hotel_list' %}" class="btn btn-tour btn-public">حجوزات الفنادق </a>
+            <a href="{% url 'trip_list' %}"  class="btn btn-tour btn-private"> الرحلات المختلفة</a>
         </div>
     </div>
 </div>
+
 
 {% endblock %}
